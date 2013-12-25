@@ -1,0 +1,10 @@
+{
+  "name": "ftff-winnings",
+  "description": "determine coconut winnings for FTFF Yahoo fantasy league",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "express": "3.4.7",
+    "oauth": "0.9.10"
+  }
+}
