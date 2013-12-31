@@ -2,9 +2,19 @@
 
 var express = require('express'),
 		app = express(),
-		consKey = 'dj0yJmk9Rk5PMHZXM1FGZXBPJmQ9WVdrOVVqaE5UV1p1TTJNbWNHbzlPVFk1TVRBNU1qWXkmcz1jb25zdW1lcnNlY3JldCZ4PTEw',
-		consSecret = '38994f9f308c51e24195a1559ea11d33de870de7',
+		yKeys = {},
 		OAuth= require('oauth').OAuth;
+
+try {
+  var file_keys = require('./keys_file');
+  for(var key in file_keys) {
+    yKeys[key]= file_keys[key];
+  }
+}
+catch(e) {
+  console.log('Unable to locate the keys_file.js file.  Please copy and ammend the keys_file-sample.js as appropriate');
+  return;
+}
 
 app.get('/', function(req, res){
   res.send('Hello world');
