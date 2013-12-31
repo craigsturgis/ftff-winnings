@@ -1,3 +1,0 @@
-exports.yahooConsumerKey= "dj0yJmk9Rk5PMHZXM1FGZXBPJmQ9WVdrOVVqaE5UV1p1TTJNbWNHbzlPVFk1TVRBNU1qWXkmcz1jb25zdW1lcnNlY3JldCZ4PTEw";
-exports.yahooConsumerSecret= "38994f9f308c51e24195a1559ea11d33de870de7";
-exports.yahooCallbackAddress= "http://csturg.is/ftff";
