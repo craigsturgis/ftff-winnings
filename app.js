@@ -63,7 +63,7 @@ app.configure(function() {
 
 
 app.get('/', function(req, res){
-  console.log(req.user);
+  console.log("root: %s", config.pathPrefix);
   res.render('index', { user: req.user, root: config.pathPrefix });
 });
 
