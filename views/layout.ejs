@@ -2,19 +2,18 @@
 <html>
 	<head>
 		<title>Passport-Yahoo (OAuth) Example</title>
-		<base href="http://craigsturgis.com/ftff">
 	</head>
 	<body>
 		<% if (!user) { %>
 			<p>
-			<a href="/">Home</a> |
-			<a href="/login">Log In</a>
+			<a href="/ftff">Home</a> |
+			<a href="/ftff/login">Log In</a>
 			</p>
 		<% } else { %>
 			<p>
-			<a href="/">Home</a> |
-			<a href="/account">Account</a> |
-			<a href="/logout">Log Out</a>
+			<a href="/ftff">Home</a> |
+			<a href="/ftff/account">Account</a> |
+			<a href="/ftff/logout">Log Out</a>
 			</p>
 		<% } %>
 		<%- body %>
