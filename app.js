@@ -72,6 +72,7 @@ app.get('/account', ensureAuthenticated, function(req, res){
 });
 
 app.get('/login', function(req, res){
+  console.log(config);
   res.render('login', { user: req.user, root: config.pathPrefix });
 });
 
