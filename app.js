@@ -67,14 +67,6 @@ app.get('/', function(req, res){
   res.render('index', { user: req.user, root: config.pathPrefix });
 });
 
-app.get('/account', ensureAuthenticated, function(req, res){
-  res.render('account', { user: req.user, root: config.pathPrefix });
-});
-
-app.get('/login', function(req, res){
-  console.log(config);
-  res.render('login', { user: req.user, root: config.pathPrefix });
-});
 
 // GET /auth/yahoo
 //   Use passport.authenticate() as route middleware to authenticate the
