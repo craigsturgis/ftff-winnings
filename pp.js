@@ -49,7 +49,7 @@ passport.use(new YahooStrategy({
 
 
 
-var app = express.createServer();
+var app = express();
 
 // configure Express
 app.configure(function() {
