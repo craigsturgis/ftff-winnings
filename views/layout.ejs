@@ -6,14 +6,14 @@
 	<body>
 		<% if (!user) { %>
 			<p>
-			<a href="/ftff">Home</a> |
-			<a href="/ftff/login">Log In</a>
+			<a href="<%= root %>/">Home</a> |
+			<a href="<%= root %>/login">Log In</a>
 			</p>
 		<% } else { %>
 			<p>
-			<a href="/ftff">Home</a> |
-			<a href="/ftff/account">Account</a> |
-			<a href="/ftff/logout">Log Out</a>
+			<a href="<%= root %>/">Home</a> |
+			<a href="<%= root %>/account">Account</a> |
+			<a href="<%= root %>/logout">Log Out</a>
 			</p>
 		<% } %>
 		<%- body %>
