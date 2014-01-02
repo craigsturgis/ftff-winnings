@@ -3,6 +3,7 @@ var express = require('express')
   , engine = require('ejs-locals')
   , util = require('util')
   , YahooStrategy = require('passport-yahoo-oauth').Strategy
+  , request = require('request')
   , config = require('./config.json');
 
 // Passport session setup.

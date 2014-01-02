@@ -9,6 +9,7 @@
     "ejs-locals": "1.0.2",
     "passport": "~0.1.17",
     "passport-oauth": "~1.0.0",
-    "passport-yahoo-oauth": "~0.1.2"
+    "passport-yahoo-oauth": "~0.1.2",
+    "request": "~2.30.0"
   }
 }
