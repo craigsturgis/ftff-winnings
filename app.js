@@ -2,11 +2,8 @@ var express = require('express')
   , passport = require('passport')
   , engine = require('ejs-locals')
   , util = require('util')
-  , YahooStrategy = require('passport-yahoo-oauth').Strategy;
-
-var YAHOO_CONSUMER_KEY = "dj0yJmk9ZFdjNFo1VGFtNGdJJmQ9WVdrOWJYWmxXVFJCTXpBbWNHbzlNekkzTXpRME5qWXkmcz1jb25zdW1lcnNlY3JldCZ4PWIx";
-var YAHOO_CONSUMER_SECRET = "e8abb68178e722f5b90300314af80a75856eb4b9";
-
+  , YahooStrategy = require('passport-yahoo-oauth').Strategy
+  , config = require('./config.json');
 
 // Passport session setup.
 //   To support persistent login sessions, Passport needs to be able to
@@ -23,21 +20,18 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-
 // Use the YahooStrategy within Passport.
 //   Strategies in passport require a `verify` function, which accept
 //   credentials (in this case, a token, tokenSecret, and Yahoo profile), and
 //   invoke a callback with a user object.
 passport.use(new YahooStrategy({
-    consumerKey: YAHOO_CONSUMER_KEY,
-    consumerSecret: YAHOO_CONSUMER_SECRET,
-    //callbackURL: "http://127.0.0.1:3000/auth/yahoo/callback"
-    callbackURL: "http://craigsturgis.com/ftff/auth/yahoo/callback"
+    consumerKey: config.yahooConsumerKey,
+    consumerSecret: config.yahooConsumerSecret,
+    callbackURL: config.yahooCallbackAddress
   },
   function(token, tokenSecret, profile, done) {
     // asynchronous verification, for effect...
     process.nextTick(function () {
-      
       // To keep the example simple, the user's Yahoo profile is returned to
       // represent the logged-in user.  In a typical application, you would want
       // to associate the Yahoo account with a user record in your database,
@@ -69,15 +63,16 @@ app.configure(function() {
 
 
 app.get('/', function(req, res){
-  res.render('index', { user: req.user });
+  console.log(req.user);
+  res.render('index', { user: req.user, root: config.pathPrefix });
 });
 
 app.get('/account', ensureAuthenticated, function(req, res){
-  res.render('account', { user: req.user });
+  res.render('account', { user: req.user, root: config.pathPrefix });
 });
 
 app.get('/login', function(req, res){
-  res.render('login', { user: req.user });
+  res.render('login', { user: req.user, root: config.pathPrefix });
 });
 
 // GET /auth/yahoo
@@ -97,15 +92,15 @@ app.get('/auth/yahoo',
 //   request.  If authentication fails, the user will be redirected back to the
 //   login page.  Otherwise, the primary route function function will be called,
 //   which, in this example, will redirect the user to the home page.
-app.get('/auth/yahoo/callback', 
+app.get('/auth/yahoo/callback',
   passport.authenticate('yahoo', { failureRedirect: '/login' }),
   function(req, res) {
-    res.redirect('/');
+    res.redirect(config.pathPrefix + '/');
   });
 
 app.get('/logout', function(req, res){
   req.logout();
-  res.redirect('/');
+  res.redirect(config.pathPrefix + '/');
 });
 
 app.listen(3000);
@@ -118,5 +113,5 @@ app.listen(3000);
 //   login page.
 function ensureAuthenticated(req, res, next) {
   if (req.isAuthenticated()) { return next(); }
-  res.redirect('/login')
+  res.redirect(config.pathPrefix + '/login');
 }
