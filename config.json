@@ -1,0 +1,5 @@
+{
+	yahooConsumerKey: "dj0yJmk9ZFdjNFo1VGFtNGdJJmQ9WVdrOWJYWmxXVFJCTXpBbWNHbzlNekkzTXpRME5qWXkmcz1jb25zdW1lcnNlY3JldCZ4PWIx",
+	yahooConsumerSecret: "e8abb68178e722f5b90300314af80a75856eb4b9",
+	yahooCallbackAddress: "http://craigsturgis.com/ftff/auth/yahoo/callback"
+}
