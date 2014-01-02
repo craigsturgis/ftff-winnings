@@ -64,7 +64,9 @@ app.configure(function() {
 
 app.get('/', function(req, res){
   console.log("root: %s", config.pathPrefix);
-  console.log(req.user._json);
+  if (req.user && req.user._json) {
+  	console.log(req.user._json);
+  }
   res.render('index', { user: req.user, root: config.pathPrefix });
 });
 
