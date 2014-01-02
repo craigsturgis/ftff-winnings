@@ -1,6 +1,6 @@
 {
-	yahooConsumerKey: "",
-	yahooConsumerSecret: "",
-	yahooCallbackAddress: "",
-	pathPrefix: ""
+        "yahooConsumerKey": "",
+        "yahooConsumerSecret": "",
+        "yahooCallbackAddress": "",
+        "pathPrefix": "ftff"
 }
