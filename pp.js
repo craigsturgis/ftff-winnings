@@ -1,5 +1,6 @@
 var express = require('express')
   , passport = require('passport')
+  , engine = require('ejs-locals')
   , util = require('util')
   , YahooStrategy = require('passport-yahoo-oauth').Strategy;
 
@@ -53,6 +54,7 @@ var app = express();
 
 // configure Express
 app.configure(function() {
+  app.engine('ejs', engine);
   app.set('views', __dirname + '/views');
   app.set('view engine', 'ejs');
   app.use(express.logger());
