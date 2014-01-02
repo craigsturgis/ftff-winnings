@@ -4,8 +4,8 @@ var express = require('express')
   , util = require('util')
   , YahooStrategy = require('passport-yahoo-oauth').Strategy;
 
-var YAHOO_CONSUMER_KEY = "dj0yJmk9Rk5PMHZXM1FGZXBPJmQ9WVdrOVVqaE5UV1p1TTJNbWNHbzlPVFk1TVRBNU1qWXkmcz1jb25zdW1lcnNlY3JldCZ4PTEw"
-var YAHOO_CONSUMER_SECRET = "38994f9f308c51e24195a1559ea11d33de870de7";
+var YAHOO_CONSUMER_KEY = "dj0yJmk9ZFdjNFo1VGFtNGdJJmQ9WVdrOWJYWmxXVFJCTXpBbWNHbzlNekkzTXpRME5qWXkmcz1jb25zdW1lcnNlY3JldCZ4PWIx";
+var YAHOO_CONSUMER_SECRET = "e8abb68178e722f5b90300314af80a75856eb4b9";
 
 
 // Passport session setup.
@@ -32,7 +32,7 @@ passport.use(new YahooStrategy({
     consumerKey: YAHOO_CONSUMER_KEY,
     consumerSecret: YAHOO_CONSUMER_SECRET,
     //callbackURL: "http://127.0.0.1:3000/auth/yahoo/callback"
-    callbackURL: "http://craigsturgis.com/ftff"
+    callbackURL: "http://craigsturgis.com/ftff/auth/yahoo/callback"
   },
   function(token, tokenSecret, profile, done) {
     // asynchronous verification, for effect...
@@ -47,9 +47,6 @@ passport.use(new YahooStrategy({
   }
 ));
 
-
-
-
 var app = express();
 
 // configure Express
@@ -61,7 +58,7 @@ app.configure(function() {
   app.use(express.cookieParser());
   app.use(express.bodyParser());
   app.use(express.methodOverride());
-  app.use(express.session({ secret: 'keyboard cat' }));
+  app.use(express.session({ secret: 'doge such fortune' }));
   // Initialize Passport!  Also use passport.session() middleware, to support
   // persistent login sessions (recommended).
   app.use(passport.initialize());
