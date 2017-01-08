@@ -1,6 +1,11 @@
 <layout-use("./layout.marko")>
   <layout-put into="body">
     <h1>${data.title}</h1>
-    <p>Welcome to ${data.title}</p>
+    <h2 if(data.teams.length)>Standings:</h2>
+      <ul>
+          <li for (team in data.teams)>
+            ${team.name}
+          </li>
+      </ul>
   </layout-put>
 </layout-use>
