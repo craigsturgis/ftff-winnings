@@ -5,8 +5,8 @@ var FantasySports = require('FantasySports');
 FantasySports.options({
     "accessTokenUrl": "https://api.login.yahoo.com/oauth/v2/get_request_token",
     "requestTokenUrl": "https://api.login.yahoo.com/oauth/v2/get_token",
-    "oauthKey": "some key",
-    "oauthSecret": "some secret",
+    "oauthKey": process.env.YAHOO_API_OAUTH_KEY,
+    "oauthSecret": process.env.YAHOO_API_OAUTH_SECRET,
     "version": "1.0",
     "callback": "http://ftff.craigsturgis.com/auth/oauth/callback",
     "encryption": "HMAC-SHA1"
