@@ -20,20 +20,59 @@ router.get('/', function(req, res) {
       var standingsObj = data.fantasy_content.league[1].standings[0];
 
       var teamArray = [];
-      //console.dir(leagueObj);
+      console.dir(leagueObj);
       _.forEach(standingsObj.teams, function(team) {
-        //console.log(team.team);
-        if (team.team && team.team[0]) {
-          var teamResult = {};
-          console.log(team.team[0]);
-          //console.log(_.find(team.team[0], _.has('name')));
-          _.assign(teamResult, _.find(team.team[0], function(o) {
-            if (o.name) return o;
-          }));
 
-          console.log(teamResult);
+        if (team.team) {
+          console.log(team.team);
+
+          var teamResult = {
+            totalWinnings: 0,
+            finalPrizes: [],
+          };
+
+          //console.log(team.team[0]);
+
+          //get team name
+          if (team.team[0]) {
+            _.assign(teamResult, _.find(team.team[0], function(o) {
+              if (o.name) return o;
+            }));
+          }
+
+          //find playoff winners
+          if (team.team[2]) {
+            var rank = team.team[2].team_standings.rank;
+            console.log("rank: " + rank);
+            if (rank === 1) {
+              teamResult.finalPrizes.push({
+                prizeName: "Playoffs Champion",
+                winnings: 300
+              });
+              teamResult.totalWinnings += 300;
+            }
+
+            if (rank === 2) {
+              teamResult.finalPrizes.push({
+                prizeName: "Playoffs Runner Up",
+                winnings: 200
+              });
+              teamResult.totalWinnings += 200;
+            }
+
+            if (rank === 3) {
+              teamResult.finalPrizes.push({
+                prizeName: "3rd place game winner",
+                winnings: 100
+              });
+              teamResult.totalWinnings += 100;
+            }
+          }
+
+          //console.log(teamResult);
           teamArray.push(teamResult);
         }
+
       });
 
       indexTemplate.render({

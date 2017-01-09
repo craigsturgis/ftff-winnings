@@ -2,10 +2,25 @@
   <layout-put into="body">
     <h1>${data.title}</h1>
     <h2 if(data.teams.length)>Standings:</h2>
-      <ul>
-          <li for (team in data.teams)>
-            ${team.name}
-          </li>
-      </ul>
+      <table>
+          <tr>
+            <th>Team</th>
+            <th>Prizes</th>
+            <th>Winnings</th>
+          </tr>
+          <tr for (team in data.teams)>
+            <td>${team.name}</td>
+            <td>
+              <ul>
+                <li for (prize in team.finalPrizes)>
+                  ${prize.prizeName}
+                </li>
+              </ul>
+            </td>
+            <td>
+              $${team.totalWinnings}
+            </td>
+          </tr>
+      </table>
   </layout-put>
 </layout-use>
