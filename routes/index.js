@@ -22,6 +22,7 @@ router.get('/', function(req, res) {
       var teamArray = [];
       var teamMap = {};
       var regSeasonWinner = null;
+      var highestPointsAgainst = null;
 
       //console.dir(req.session);
       //console.dir(leagueObj);
@@ -91,6 +92,11 @@ router.get('/', function(req, res) {
               (teamResult.wins === regSeasonWinner.wins && teamResult.pointsFor > regSeasonWinner.pointsFor)) {
               regSeasonWinner = teamResult;
             }
+
+            //TODO need tie scenario logic
+            if (!highestPointsAgainst || teamResult.pointsAgainst > highestPointsAgainst.pointsAgainst) {
+              highestPointsAgainst = teamResult;
+            }
           }
 
           //console.log(teamResult);
@@ -101,10 +107,16 @@ router.get('/', function(req, res) {
       });
 
       regSeasonWinner.finalPrizes.push({
-        prizeName: "Regular season best record",
+        prizeName: "Regular season best record (" + regSeasonWinner.wins + "-" + regSeasonWinner.losses + ")",
         winnings: 50
       });
       regSeasonWinner.totalWinnings += 50;
+
+      highestPointsAgainst.finalPrizes.push({
+        prizeName: "Highest Points against (" + highestPointsAgainst.pointsAgainst + ")",
+        winnings: 40
+      });
+      highestPointsAgainst.totalWinnings += 40;
       //console.dir(teamArray);
 
 
@@ -171,7 +183,7 @@ router.get('/', function(req, res) {
         _.forEach(weekWinners, function(weekWinner) {
           if (weekWinner) {
             teamMap[weekWinner.key].finalPrizes.push({
-              prizeName: "Week " + weekWinner.weekNumber + " Highest Points: " + weekWinner.pointsFor,
+              prizeName: "Week " + weekWinner.weekNumber + " Highest Points: (" + weekWinner.pointsFor + ")",
               winnings: 20
             });
             teamMap[weekWinner.key].totalWinnings += 20;
