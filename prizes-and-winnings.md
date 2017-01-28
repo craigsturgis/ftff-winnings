@@ -21,7 +21,7 @@ Regular Season Highest Scoring Non QB
 Regular Season Highest Scoring Undrafted Non QB
 50
 
-Regular Season Highest Scoring Mystery Round Player
+Regular Season Highest Scoring Mystery Round Player (2016: 14)
 50
 
 Marisa Miller Award lowest combined points of first 2 draft picks
