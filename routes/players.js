@@ -27,11 +27,10 @@ var apiUrl = [
   ';year=2016?format=json',
 ].join('');
 
-var playerMap = {};
-var playerArray = [];
-
 router.get('/', function(req, res) {
-  //console.log("isAuthenticated: " + FantasySports.isAuthenticated);
+
+  var playerMap = {};
+  var playerArray = [];
 
   bbPromise
   .resolve(FantasySports
@@ -78,20 +77,36 @@ router.get('/', function(req, res) {
 
     // console.log(util.inspect(pointsMap, {depth: null}))
 
-    var highestPoints = null;
-
     _.forEach(pointsMap, function(playerTotal) {
       var player = playerMap[playerTotal.player_key];
 
       player.week_13_points = playerTotal.pointTotal;
+      player.week_13_points_display = playerTotal.pointTotal.toFixed(2);
       player.weeks = playerTotal.weeks;
-    })
+      player.pointBreakdown = _.reduce(playerTotal.weeks, function(result, value, key) {
+        if (value) {
+          result += value.toFixed(2) + ' ';
+
+          if (key != player.weeks.length - 1) {
+            result += '+ ';
+          }
+        }
+
+        return result;
+      }, '');
+    });
+
+    var highestScoringArray = _.orderBy(playerArray, ['week_13_points'], ['desc']);
+
+    console.log(util.inspect(highestScoringArray, {depth: null}));
 
     playersTemplate.render({
       $global: {
         ENV_DEVELOPMENT: req.app.locals.ENV_DEVELOPMENT,
         isAuthenticated: FantasySports.isAuthenticated
       },
+      highestScoring: _.take(highestScoringArray, 1)[0],
+      highestScoringRunnersUp: _.take(highestScoringArray, 5),
     }, res);
 
   });

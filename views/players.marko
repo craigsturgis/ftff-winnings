@@ -1,5 +1,36 @@
 <layout-use("./layout.marko")>
   <layout-put into="body">
-    <h1>Play on, playa</h1>
+    <h1>Player Based Prizes</h1>
+    <h2>Highest Scoring Player Regular Season ($50)</h2>
+
+    <h3>${data.highestScoring.name}</h3>
+
+    <ul>
+      <li>Team: ${data.highestScoring.owner_team_name}</li>
+      <li>Regular Season Points: ${data.highestScoring.week_13_points_display}</li>
+    </ul>
+
+    <h3>Top 5 Contenders:</h3>
+
+    <table>
+      <tr>
+        <th>Rank</th>
+        <th>Player</th>
+        <th>Owner</th>
+        <th>Reg Ssn Pts</th>
+        <th>Total Pts</th>
+        <th>By Week</th>
+      </tr>
+      <tr for (player in data.highestScoringRunnersUp | status-var=loop)>
+        <td>${loop.getIndex()+1}.</td>
+        <td>${player.name}</td>
+        <td>${player.owner_team_name}</td>
+        <td>${player.week_13_points_display}</td>
+        <td>${player.week_17_points}</td>
+        <td>${player.pointBreakdown}</td>
+      </tr>
+    </table>
+
+    <a href="/">Overall League prizes</a>
   </layout-put>
 </layout-use>
