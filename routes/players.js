@@ -6,6 +6,7 @@ const marko = require('marko');
 const util = require('util');
 const bbPromise = require("bluebird");
 const cumulativePoints = require("../helpers/cumulativePoints");
+const draftResults = require('../helpers/draftResults');
 
 
 var playersTemplate = marko.load(require.resolve('../views/players.marko'));
@@ -31,6 +32,7 @@ router.get('/', function(req, res) {
 
   var playerMap = {};
   var playerArray = [];
+  var highestScoringArray = null;
 
   bbPromise
   .resolve(FantasySports
@@ -96,9 +98,20 @@ router.get('/', function(req, res) {
       }, '');
     });
 
-    var highestScoringArray = _.orderBy(playerArray, ['week_13_points'], ['desc']);
+    highestScoringArray = _.orderBy(playerArray, ['week_13_points'], ['desc']);
 
-    console.log(util.inspect(highestScoringArray, {depth: null}));
+    // console.log(util.inspect(highestScoringArray, {depth: null}));
+    return draftResults.firstTwoRounds(req, res);
+
+  }).then(function(firstTwoRounds) {
+
+    console.log(util.inspect(firstTwoRounds, {depth: null}));
+
+    return draftResults.mysteryRound(req, res);
+
+  }).then(function(mysteryRound) {
+
+    console.log(util.inspect(mysteryRound, {depth: null}));
 
     playersTemplate.render({
       $global: {
