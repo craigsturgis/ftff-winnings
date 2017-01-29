@@ -2,8 +2,12 @@ var express = require('express');
 var router = express.Router();
 var FantasySports = require('FantasySports');
 var _ = require('lodash');
+const marko = require('marko');
 const util = require('util');
 const bbPromise = require("bluebird");
+
+
+var playersTemplate = marko.load(require.resolve('../views/players.marko'));
 
 /* GET players route. */
 
@@ -41,7 +45,7 @@ router.get('/', function(req, res) {
     _.forEach(playersObj, function(player) {
       if (player.player) {
 
-        console.log(util.inspect(player.player, {depth: 5}));
+        // console.log(util.inspect(player.player, {depth: 5}));
 
         players.push({
           player_key: player.player[0][0].player_key,
@@ -53,7 +57,7 @@ router.get('/', function(req, res) {
           // owner_count: player.player[2].ownership[0],
         });
 
-        console.log('_______________');
+        // console.log('_______________');
       }
 
     });
@@ -61,7 +65,12 @@ router.get('/', function(req, res) {
     //console.log(util.inspect(playersObj, {depth: null}))
     console.log(util.inspect(players, {depth: null}))
 
-    res.send("OK");
+    playersTemplate.render({
+      $global: {
+        ENV_DEVELOPMENT: req.app.locals.ENV_DEVELOPMENT,
+        isAuthenticated: FantasySports.isAuthenticated
+      },
+    }, res);
 
   });
 });
