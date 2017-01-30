@@ -7,10 +7,10 @@ const baseUrl = "http://fantasysports.yahooapis.com/fantasy/v2",
   leagueId = "nfl.l.318700";
 
 module.exports = {
-  playerCumulativePoints: playerCumulativePoints
+  cumulativePoints: cumulativePoints
 };
 
-function playerCumulativePoints(playerKeyArray, throughWeek, req, res) {
+function cumulativePoints(playerKeyArray, throughWeek, req, res) {
 
   var apiUrls = _.map(_.range(1, throughWeek + 1), function(weekNum) {
     return getApiUrlForWeek(playerKeyArray, weekNum);
