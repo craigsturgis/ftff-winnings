@@ -32,7 +32,7 @@ function firstTwoRounds(req, res) {
 
   return requestDraftResults(req, res)
   .then(function(draft) {
-    return _.slice(draft.rounds, 1, 3);
+    return _.take(draft.picks, 24);
   });
 
 }
